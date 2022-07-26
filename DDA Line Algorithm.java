@@ -29,8 +29,6 @@ public class Assignment1 implements GLEventListener{
 	   }
 	   gl.glEnd();
 	   
-    
-      
    }
    @Override
    public void dispose(GLAutoDrawable arg0) {
@@ -49,13 +47,10 @@ public class Assignment1 implements GLEventListener{
        glu.gluOrtho2D(-100.0, 100.0, -100.0, 100.0);
    }
 
-   
-
    @Override
    public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
       // method body
    }
-   
    
    public void DDA(GL2 gl, float x1, float y1, float x2, float y2) {
        
@@ -65,11 +60,6 @@ public class Assignment1 implements GLEventListener{
      //write your own code
       
     }
-
-   
-   
-   
-   
    
    public static void main(String[] args) {
       //getting the capabilities object of GL2 profile
