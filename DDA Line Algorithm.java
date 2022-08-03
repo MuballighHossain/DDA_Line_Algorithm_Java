@@ -5,34 +5,37 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
-import java.io.File;
-import java.io.FileNotFoundException;
 import javax.swing.JFrame;
-import java.util.Scanner;
-public class Assignment1 implements GLEventListener{
+
+public class labAssignment2 implements GLEventListener{
    
 	private GLU glu;
    @Override
    public void display(GLAutoDrawable drawable) {
+      final GL2 gl = drawable.getGL().getGL2();
+      gl.glPointSize(4);
+      gl.glBegin(GL2.GL_POINTS);
+      //My ID - 19101289 
+     //eight
+      DDA(gl, 10,10,15,10);
+      DDA(gl, 10,10,10,5);
+      DDA(gl, 10,5,10,0);
+      DDA(gl, 10,0,15,0);
+      DDA(gl, 15,0,15,5);
+      DDA(gl, 15,5,15,10);
+      //nine
+      DDA(gl, 20,10,25,10);
+      DDA(gl, 25,10,25,5);
+      DDA(gl, 20,10,20,5);
+      DDA(gl, 20,5,25,5);
+      DDA(gl, 25,5,25,0);
       
-	   final GL2 gl = drawable.getGL().getGL2();
-	   gl.glBegin(GL2.GL_POINTS);
-	   int min = -1;
-	   
-	   int max =1;
-	   for (int i=0; i<100;i++)
-	   {
-		   double x = min*(1.0-Math.random()+max*Math.random());
-		   double y = min*(1.0-Math.random()+max*Math.random());
-		   gl.glVertex2d(x,y);
-		   
-	   }
-	   gl.glEnd();
-	   
+      gl.glEnd();
+      
    }
    @Override
    public void dispose(GLAutoDrawable arg0) {
-      //method body
+      
    }
    
    @Override
@@ -46,28 +49,45 @@ public class Assignment1 implements GLEventListener{
        gl.glLoadIdentity();
        glu.gluOrtho2D(-100.0, 100.0, -100.0, 100.0);
    }
-
    @Override
    public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
       // method body
    }
-   
-   public void DDA(GL2 gl, float x1, float y1, float x2, float y2) {
+    
+   public void DDA(GL2 gl,double x1, double y1, double x2, double y2) {
        
        gl.glPointSize(3.0f);
-       gl.glColor3d(1, 0, 0);
+       gl.glColor3d(0, 1, 0);
        
      //write your own code
-      
+     
+    	   double dx=x2-x1;
+    	   double dy=y2-y1;
+    	   double m=dy/dx;
+    	   double step;
+    	   gl.glVertex2d(x1,y1);
+    	   if(Math.abs(dx) > Math.abs(dy)) {
+    		   step= Math.abs(dx);
+    	   } else {
+    		   step= Math.abs(dy);
+    	   }
+    	   double Xinc= dx/step;
+    	   double Yinc= dy/step;
+    	   for (int i=0;i<=step;i++) {
+    		   
+    		   gl.glVertex2d(x1, y1);
+    		   x1=x1+Xinc;
+    		   y1=y1+Yinc;
+    		   		   
+    	   }
     }
-   
    public static void main(String[] args) {
       //getting the capabilities object of GL2 profile
       final GLProfile profile = GLProfile.get(GLProfile.GL2);
       GLCapabilities capabilities = new GLCapabilities(profile);
       // The canvas 
       final GLCanvas glcanvas = new GLCanvas(capabilities);
-      Assignment1 l = new Assignment1();
+      labAssignment2 l = new labAssignment2();
       glcanvas.addGLEventListener(l);
       glcanvas.setSize(400, 400);
       //creating frame
@@ -78,3 +98,5 @@ public class Assignment1 implements GLEventListener{
       frame.setVisible(true);
    }//end of main
 }//end of classimport javax.media.opengl.GL2;
+
+
